@@ -41,3 +41,9 @@ textToSpeech.store("./text.wav");
 ```
 http://localhost:8080/api/tts/text2audio?text=%E5%90%83%E8%91%A1%E8%90%84%E4%B8%8D%E5%90%90%E8%91%A1%E8%90%84%E7%9A%AE
 ```
+
+### 文字转换语音示例页面
+
+```
+http://localhost:8080/
+```
