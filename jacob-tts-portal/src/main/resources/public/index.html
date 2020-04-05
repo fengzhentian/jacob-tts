@@ -19,14 +19,19 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <input type="button" class="layui-btn" lay-submit lay-filter="formDemo" value="立即提交"/>
+                        <input type="reset" class="layui-btn layui-btn-primary" value="重置"/>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">音频链接</label>
                     <div class="layui-input-block">
-                        <input type="text" v-model="audioUrl" class="layui-input" placeholder="请输入文字" disabled>
+                        <input type="text" v-model="audioUrl" class="layui-input" placeholder="音频链接" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="button" class="layui-btn" value="播放" @click="play"/>
                     </div>
                 </div>
             </form>
