@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jing</groupId>
+    <artifactId>jacob-tts</artifactId>
+    <version>0.0.1</version>
+    <name>jacob-tts</name>
+    <description>jacob-tts</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.jacob/jacob 文字转语音 -->
+        <dependency>
+            <groupId>com.hynnet</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.18</version>
+        </dependency>
+    </dependencies>
+
+</project>
