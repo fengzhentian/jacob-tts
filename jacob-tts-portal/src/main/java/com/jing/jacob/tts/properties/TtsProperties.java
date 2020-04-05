@@ -27,4 +27,8 @@ public class TtsProperties {
      * 请求访问路径
      */
     private String urlPath;
+    /**
+     * 音频访问地址
+     */
+    private String audioAccessPath;
 }

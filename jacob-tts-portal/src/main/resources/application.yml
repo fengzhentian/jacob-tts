@@ -1,3 +1,7 @@
+server:
+  port: 8080
+
 tts:
-  filepath: ./
-  url-path: http://localhost:8080/temp
+  filepath: e://audio/
+  url-path: http://localhost:${server.port}/audio
+  audio-access-path: /audio/**
