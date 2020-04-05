@@ -89,7 +89,7 @@ public class TextToSpeech {
             // 设置文件输出流格式
             Dispatch.putRef(spFileStream, "Format", spAudioFormat);
             // 调用输出 文件流打开方法，创建一个.wav文件
-            Dispatch.call(spFileStream, "Open", new Variant("./text.wav"), new Variant(3), new Variant(true));
+            Dispatch.call(spFileStream, "Open", new Variant(filepath), new Variant(3), new Variant(true));
             // 设置声音对象的音频输出流为输出文件对象
             Dispatch.putRef(spVoice, "AudioOutputStream", spFileStream);
             // 设置音量 0到100
