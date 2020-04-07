@@ -1,5 +1,6 @@
 layui.use(['layer', 'element', 'form'], function () {
     var form = layui.form;
+    var layer = layui.layer;
 
     //监听提交
     form.on('submit(formDemo)', function (data) {
@@ -16,11 +17,16 @@ layui.use(['layer', 'element', 'form'], function () {
         methods: {
             text2audio: function () {
                 var _this = this;
+                _this.audioUrl = '';
+                var index = layer.load();
                 $.ajax({
                     method: 'GET',
                     url: '/api/tts/text2audio?text=' + _this.text
                 }).done(function (msg) {
                     _this.audioUrl = msg;
+                }).always(function () {
+                    //关闭
+                    layer.close(index);
                 })
             },
             play: function () {
