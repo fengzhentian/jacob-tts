@@ -2,6 +2,7 @@ package com.jing.jacob.tts.controller;
 
 import com.jing.jacob.tts.TextToSpeech;
 import com.jing.jacob.tts.properties.TtsProperties;
+import it.sauronsoftware.jave.AudioUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,10 +37,21 @@ public class TextToSpeechRestController {
         }
 
         TextToSpeech textToSpeech = new TextToSpeech(text);
-        String filename = now + ".wav";
-        textToSpeech.store(String.join("/", properties.getFilepath(), filename));
+        String wavFilename = now + ".wav";
+        String mp3Filename = now + ".mp3";
+        String wavFilepath = String.join("/", properties.getFilepath(), wavFilename);
 
-        return String.join("/", properties.getUrlPath(), filename);
+        File wavFile = new File(String.join("/", properties.getFilepath(), wavFilename));
+        File mp3File = new File(String.join("/", properties.getFilepath(), mp3Filename));
+
+        textToSpeech.store(wavFilepath);
+
+        if (wavFile.exists()) {
+            AudioUtils.amrToMp3(wavFile, mp3File);
+            wavFile.delete();
+        }
+
+        return String.join("/", properties.getUrlPath(), mp3Filename);
     }
 
 }
