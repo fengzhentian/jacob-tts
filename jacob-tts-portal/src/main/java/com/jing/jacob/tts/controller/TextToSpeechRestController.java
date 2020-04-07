@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +29,11 @@ public class TextToSpeechRestController {
     @GetMapping("/text2audio")
     public String text2audio(@RequestParam String text) {
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+
+        File directory = new File(properties.getFilepath());
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
 
         TextToSpeech textToSpeech = new TextToSpeech(text);
         String filename = now + ".wav";
