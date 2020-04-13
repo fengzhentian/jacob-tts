@@ -2,6 +2,8 @@ package com.jing.jacob.tts.controller;
 
 import com.jing.jacob.tts.TextToSpeech;
 import com.jing.jacob.tts.properties.TtsProperties;
+import com.jing.jacob.tts.utils.ResultUtil;
+import com.jing.jacob.tts.vo.ResultVO;
 import it.sauronsoftware.jave.AudioUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class TextToSpeechRestController {
     private TtsProperties properties;
 
     @GetMapping("/text2audio")
-    public String text2audio(@RequestParam String text) {
+    public ResultVO<String> text2audio(@RequestParam String text) {
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
 
         File directory = new File(properties.getFilepath());
@@ -51,7 +53,8 @@ public class TextToSpeechRestController {
             wavFile.delete();
         }
 
-        return String.join("/", properties.getUrlPath(), mp3Filename);
+        String url = String.join("/", properties.getUrlPath(), mp3Filename);
+        return ResultUtil.success(url);
     }
 
 }

@@ -22,8 +22,10 @@ layui.use(['layer', 'element', 'form'], function () {
                 $.ajax({
                     method: 'GET',
                     url: '/api/tts/text2audio?text=' + _this.text
-                }).done(function (msg) {
-                    _this.audioUrl = msg;
+                }).done(function (res) {
+                    if (res && res.code === '8888') {
+                        _this.audioUrl = res.data;
+                    }
                 }).always(function () {
                     //关闭
                     layer.close(index);
