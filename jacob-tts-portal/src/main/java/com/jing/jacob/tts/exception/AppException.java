@@ -2,9 +2,6 @@ package com.jing.jacob.tts.exception;
 
 import com.jing.jacob.tts.constants.ErrorCode;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * 应用级异常
  *
@@ -73,7 +70,7 @@ public class AppException extends RuntimeException {
             if (errCode.getMsg().contains("%s") && isTransfer) {
                 this.errMsg = String.format(errCode.getMsg(), errMsg);
             } else {
-                this.errMsg = Stream.of(errMsg).map(Object::toString).collect(Collectors.joining(";"));
+//                this.errMsg = Stream.of(errMsg).map(Object::toString).collect(Collectors.joining(";"));
             }
         } else {
             this.errMsg = errCode.getMsg();

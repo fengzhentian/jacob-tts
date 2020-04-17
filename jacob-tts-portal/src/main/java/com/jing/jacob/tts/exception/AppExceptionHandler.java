@@ -44,7 +44,7 @@ public class AppExceptionHandler {
     public ResponseEntity<ResultVO<?>> handleException(Exception e) {
         log.error(e.getMessage(), e);
         ResultVO<?> bizResult = ResultUtil.error(ErrorType.APP_ERROR, e);
-        return new ResponseEntity<>(bizResult, HttpStatus.OK);
+        return new ResponseEntity<ResultVO<?>>(bizResult, HttpStatus.OK);
     }
 
 }

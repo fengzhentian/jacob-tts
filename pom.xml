@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Environment Settings -->
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -21,7 +21,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.locales>zh_CN</project.build.locales>
 
-        <spring-boot-dependencies.version>2.2.6.RELEASE</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>1.5.22.RELEASE</spring-boot-dependencies.version>
+        <hutool.version>4.6.7</hutool.version>
     </properties>
 
     <modules>
@@ -37,6 +38,13 @@
                 <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- 第三方工具类库 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

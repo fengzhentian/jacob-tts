@@ -1,5 +1,6 @@
 package com.jing.jacob.tts.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.jing.jacob.tts.TextToSpeech;
 import com.jing.jacob.tts.properties.TtsProperties;
 import com.jing.jacob.tts.utils.ResultUtil;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * @ClassName: TextToSpeechRestController.java
@@ -31,7 +30,7 @@ public class TextToSpeechRestController {
 
     @GetMapping("/text2audio")
     public ResultVO<String> text2audio(@RequestParam String text) {
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+        String now = DateUtil.date().toString("yyyyMMddHHmmssSSS");
 
         File directory = new File(properties.getFilepath());
         if (!directory.exists()) {
@@ -41,10 +40,10 @@ public class TextToSpeechRestController {
         TextToSpeech textToSpeech = new TextToSpeech(text);
         String wavFilename = now + ".wav";
         String mp3Filename = now + ".mp3";
-        String wavFilepath = String.join("/", properties.getFilepath(), wavFilename);
+        String wavFilepath = properties.getFilepath() + "/" + wavFilename;
 
-        File wavFile = new File(String.join("/", properties.getFilepath(), wavFilename));
-        File mp3File = new File(String.join("/", properties.getFilepath(), mp3Filename));
+        File wavFile = new File(properties.getFilepath() + "/" + wavFilename);
+        File mp3File = new File(properties.getFilepath() + "/" + mp3Filename);
 
         textToSpeech.store(wavFilepath);
 
@@ -53,7 +52,7 @@ public class TextToSpeechRestController {
             wavFile.delete();
         }
 
-        String url = String.join("/", properties.getUrlPath(), mp3Filename);
+        String url = properties.getUrlPath() + "/" + mp3Filename;
         return ResultUtil.success(url);
     }
 

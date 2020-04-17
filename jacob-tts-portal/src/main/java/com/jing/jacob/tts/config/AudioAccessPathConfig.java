@@ -3,7 +3,7 @@ package com.jing.jacob.tts.config;
 import com.jing.jacob.tts.properties.TtsProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.Resource;
 
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @date: 2020-04-06 0:09
  */
 @Configuration
-public class AudioAccessPathConfig implements WebMvcConfigurer {
+public class AudioAccessPathConfig extends WebMvcConfigurerAdapter {
 
     @Resource
     private TtsProperties properties;
