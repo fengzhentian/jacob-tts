@@ -21,7 +21,7 @@ layui.use(['layer', 'element', 'form'], function () {
                 var index = layer.load();
                 $.ajax({
                     method: 'GET',
-                    url: '/api/tts/text2audio?text=' + _this.text
+                    url: 'api/tts/text2audio?text=' + _this.text
                 }).done(function (res) {
                     if (res && res.code === '8888') {
                         _this.audioUrl = res.data;
