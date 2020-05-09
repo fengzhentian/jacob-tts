@@ -5,3 +5,4 @@ tts:
   filepath: e://audio/
   url-path: http://localhost:${server.port}/audio
   audio-access-path: /audio/**
+  retention-days: 7

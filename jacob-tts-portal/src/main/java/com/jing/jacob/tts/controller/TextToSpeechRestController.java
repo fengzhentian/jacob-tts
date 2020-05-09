@@ -32,7 +32,9 @@ public class TextToSpeechRestController {
     public ResultVO<String> text2audio(@RequestParam String text) {
         String now = DateUtil.date().toString("yyyyMMddHHmmssSSS");
 
-        File directory = new File(properties.getFilepath());
+        String dateDirName = DateUtil.date().toString("yyyyMMdd");
+
+        File directory = new File(properties.getFilepath() + "/" + dateDirName);
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -40,10 +42,10 @@ public class TextToSpeechRestController {
         TextToSpeech textToSpeech = new TextToSpeech(text);
         String wavFilename = now + ".wav";
         String mp3Filename = now + ".mp3";
-        String wavFilepath = properties.getFilepath() + "/" + wavFilename;
+        String wavFilepath = properties.getFilepath() + "/" + dateDirName + "/" + wavFilename;
 
-        File wavFile = new File(properties.getFilepath() + "/" + wavFilename);
-        File mp3File = new File(properties.getFilepath() + "/" + mp3Filename);
+        File wavFile = new File(properties.getFilepath() + "/" + dateDirName + "/" + wavFilename);
+        File mp3File = new File(properties.getFilepath() + "/" + dateDirName + "/" + mp3Filename);
 
         textToSpeech.store(wavFilepath);
 
@@ -52,7 +54,7 @@ public class TextToSpeechRestController {
             wavFile.delete();
         }
 
-        String url = properties.getUrlPath() + "/" + mp3Filename;
+        String url = properties.getUrlPath() + "/" + dateDirName + "/" + mp3Filename;
         return ResultUtil.success(url);
     }
 

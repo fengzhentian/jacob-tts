@@ -31,4 +31,8 @@ public class TtsProperties {
      * 音频访问地址
      */
     private String audioAccessPath;
+    /**
+     * 文件保留天数（-1：不清理）
+     */
+    private int retentionDays;
 }
