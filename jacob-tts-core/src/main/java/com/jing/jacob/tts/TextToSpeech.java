@@ -68,21 +68,23 @@ public class TextToSpeech {
      * @param filepath 语音文件路径
      */
     public void store(String filepath) {
-        ActiveXComponent ax = null;
+        ActiveXComponent voiceComponent = null;
+        ActiveXComponent fileStreamComponent = null;
+        ActiveXComponent audioFormatComponent = null;
 
         try {
-            ax = new ActiveXComponent("Sapi.SpVoice");
+            voiceComponent = new ActiveXComponent("Sapi.SpVoice");
 
             // 运行时输出语音内容
-            Dispatch spVoice = ax.getObject();
+            Dispatch spVoice = voiceComponent.getObject();
 
             // 下面是构建文件流把生成语音文件
 
-            ax = new ActiveXComponent("Sapi.SpFileStream");
-            Dispatch spFileStream = ax.getObject();
+            fileStreamComponent = new ActiveXComponent("Sapi.SpFileStream");
+            Dispatch spFileStream = fileStreamComponent.getObject();
 
-            ax = new ActiveXComponent("Sapi.SpAudioFormat");
-            Dispatch spAudioFormat = ax.getObject();
+            audioFormatComponent = new ActiveXComponent("Sapi.SpAudioFormat");
+            Dispatch spAudioFormat = audioFormatComponent.getObject();
 
             // 设置音频流格式
             Dispatch.put(spAudioFormat, "Type", new Variant(22));
@@ -110,8 +112,14 @@ public class TextToSpeech {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (ax != null) {
-                ax.safeRelease();
+            if (voiceComponent != null) {
+                voiceComponent.safeRelease();
+            }
+            if (fileStreamComponent != null) {
+                fileStreamComponent.safeRelease();
+            }
+            if (audioFormatComponent != null) {
+                audioFormatComponent.safeRelease();
             }
         }
     }
