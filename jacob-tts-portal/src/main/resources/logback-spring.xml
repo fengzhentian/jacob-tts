@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <!-- 日志级别 -->
+    <property name="logLevel" value="INFO"/>
+    <!-- 日志地址 -->
+    <property name="logPath" value="./logs"/>
+    <!-- 日志名称 -->
+    <property name="logFile" value="jacob-tts-portal"/>
+    <!-- 最大日志文件大小 -->
+    <property name="maxFileSize" value="10MB"/>
+    <!-- 日志保存最大天数 -->
+    <property name="maxHistory" value="7"/>
+    <!-- 日志最大占用空间 -->
+    <property name="totalSizeCap" value="3GB"/>
+    <!-- 异步缓冲队列的深度,该值会影响性能.默认值为256 -->
+    <property name="queueSize" value="512"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev">
+        <root level="${logLevel}">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+    <springProfile name="!dev">
+
+        <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logPath}/${logFile}.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <!-- rollover daily -->
+                <fileNamePattern>${logPath}/${logFile}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- each file should be at most 1GB, keep 60 days worth of history, but at most 20GB -->
+                <maxFileSize>${maxFileSize}</maxFileSize>
+                <maxHistory>${maxHistory}</maxHistory>
+                <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="${logLevel}">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="ROLLING" />
+        </root>
+    </springProfile>
+</configuration>
